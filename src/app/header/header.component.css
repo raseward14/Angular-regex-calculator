@@ -1,4 +1,7 @@
 p {
+    width: 90%;
+    margin-left: 45rem;
     font-size: 1.5rem;
     font-weight: bold;
+    font-family: 'Calibri', sans-serif;
 }
