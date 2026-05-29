@@ -1,9 +1,16 @@
-<section>
-    <h4>Expression</h4>
-    <input class="form-control" type="text" [(ngModel)]="regex" placeholder="Enter your regex here" />
-</section>
-<hr />
-<section>
-    <h4>Test String</h4>
-    <p class="test-string">{{ testString }}</p>
-</section>
+<form [formGroup]="regexForm">
+    <section>
+        <h4>Expression</h4>
+            <input 
+                class="form-control" 
+                type="text" 
+                formControlName="regexControl" 
+                placeholder="Enter your regex here" />
+            
+    </section>
+    <hr />
+    <section>
+        <h4>Test String</h4>
+        <textarea class="test-string">{{ testString }}</textarea>
+    </section>
+</form>
