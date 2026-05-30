@@ -16,6 +16,10 @@ export class RegexComponent {
   testString = 'this is a hard coded test string';
 
   private destroyRef = inject(DestroyRef);
+
+  get regexControlValue() {
+    return this.regexForm.get('regexControl')?.value ?? '';
+  }
   
   constructor() {
     const subscription = this.regexForm.valueChanges
@@ -29,4 +33,5 @@ export class RegexComponent {
       subscription.unsubscribe();
     })
   }
+
 }

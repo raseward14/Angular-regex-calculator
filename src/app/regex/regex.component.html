@@ -1,12 +1,13 @@
 <form [formGroup]="regexForm">
     <section>
         <h4>Expression</h4>
-            <input 
-                class="form-control" 
+        <span class="form-control">
+            /<input 
                 type="text" 
                 formControlName="regexControl" 
-                placeholder="Enter your regex here" />
-            
+                [attr.size]="regexControlValue.length || 0" 
+                placeholder="Enter regex here" />/
+        </span>
     </section>
     <hr />
     <section>
