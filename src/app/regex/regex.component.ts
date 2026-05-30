@@ -18,6 +18,7 @@ export class RegexComponent {
   private destroyRef = inject(DestroyRef);
 
   get regexControlValue() {
+    
     return this.regexForm.get('regexControl')?.value ?? '';
   }
   
