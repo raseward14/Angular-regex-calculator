@@ -42,6 +42,8 @@ export class RegexComponent {
               console.error('Invalid regex pattern:', error);
               this.regexPattern = 'Invalid regex pattern';
             }
+          } else {
+            this.regexPattern = '';
           }
         })
       ).subscribe();
