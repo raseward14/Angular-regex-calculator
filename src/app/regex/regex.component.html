@@ -6,16 +6,16 @@
                 type="text" 
                 formControlName="regexControl" 
                 [attr.size]="regexControlValue.length || 0" 
-                placeholder="Enter regex here" />/
+                placeholder="Enter regex here" />/g
         </span>
     </section>
     <hr />
     <section>
         <h4>Test String</h4>
-        <textarea class="test-string">{{ testString }}</textarea>
+        <textarea class="regex-section">{{ testString }}</textarea>
     </section>
     <section>
         <h4>Matches</h4>
-        <textarea class="test-string">{{ regexPattern }}</textarea>
+        <textarea class="regex-section">{{ regexPattern }}</textarea>
     </section>
 </form>
