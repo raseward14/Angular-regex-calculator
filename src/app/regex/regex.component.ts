@@ -14,19 +14,36 @@ export class RegexComponent {
   }
   )
   testString = 'this is a hard coded test string';
+  regexPattern = '';
 
   private destroyRef = inject(DestroyRef);
 
   get regexControlValue() {
     return this.regexForm.get('regexControl')?.value ?? '';
   }
-  
+
+
+
   constructor() {
     const subscription = this.regexForm.valueChanges
       .pipe(
         debounceTime(500), // Wait for 500ms of inactivity
         distinctUntilChanged(), // Only emit if the value has changed
-        tap(value => console.log('regex changed:', value))
+        tap(value => {
+          console.log('regex changed:', value);
+          const pattern = this.regexControlValue;
+          if (pattern) {
+            try {
+              const regex = new RegExp(pattern, 'g');
+              const matches = this.testString.match(regex);
+              this.regexPattern = matches ? matches.join(', ') : 'No matches found';
+              console.log('Matches found:', this.regexPattern);
+            } catch (error) {
+              console.error('Invalid regex pattern:', error);
+              this.regexPattern = 'Invalid regex pattern';
+            }
+          }
+        })
       ).subscribe();
 
     this.destroyRef.onDestroy(() => {
