@@ -11,7 +11,6 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 export class RegexComponent {
   regexForm = new FormGroup({
     regexControl: new FormControl(''),
-    regexPattern: new FormControl(''),
     testStringControl: new FormControl('this is a hard coded test string.')
   }
   )
@@ -25,10 +24,6 @@ export class RegexComponent {
 
   get testStringValue() {
     return this.regexForm.get('testStringControl')?.value ?? '';
-  }
-
-  get regexPatternValue() {
-    return this.regexForm.get('regexPattern')?.value ?? '';
   }
 
   constructor() {
@@ -52,7 +47,11 @@ export class RegexComponent {
             this.regexPattern = '';
           }
         })
-      ).subscribe();
+      ).subscribe({
+        next: (value) => {
+          console.log('value changed: ', value);
+        }
+      });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
