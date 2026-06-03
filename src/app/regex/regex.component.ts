@@ -10,10 +10,11 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 })
 export class RegexComponent {
   regexForm = new FormGroup({
-    regexControl: new FormControl('')
+    regexControl: new FormControl(''),
+    regexPattern: new FormControl(''),
+    testStringControl: new FormControl('this is a hard coded test string.')
   }
   )
-  testString = 'this is a hard coded test string';
   regexPattern = '';
 
   private destroyRef = inject(DestroyRef);
@@ -22,21 +23,26 @@ export class RegexComponent {
     return this.regexForm.get('regexControl')?.value ?? '';
   }
 
+  get testStringValue() {
+    return this.regexForm.get('testStringControl')?.value ?? '';
+  }
 
+  get regexPatternValue() {
+    return this.regexForm.get('regexPattern')?.value ?? '';
+  }
 
   constructor() {
     const subscription = this.regexForm.valueChanges
       .pipe(
         debounceTime(500), // Wait for 500ms of inactivity
-        distinctUntilChanged(), // Only emit if the value has changed
         tap(value => {
           console.log('regex changed:', value);
           const pattern = this.regexControlValue;
           if (pattern) {
             try {
               const regex = new RegExp(pattern, 'g');
-              const matches = this.testString.match(regex);
-              this.regexPattern = matches ? matches.join(', ') : 'No matches found';
+              const matches = this.testStringValue.match(regex);
+              this.regexPattern = matches ? matches.join('') : 'No matches found';
               console.log('Matches found:', this.regexPattern);
             } catch (error) {
               console.error('Invalid regex pattern:', error);
