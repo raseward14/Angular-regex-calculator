@@ -1,10 +1,10 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { debounceTime, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-regex',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './regex.component.html',
   styleUrl: './regex.component.css',
 })
@@ -14,7 +14,7 @@ export class RegexComponent {
     testStringControl: new FormControl('this is a hard coded test string.')
   }
   )
-  regexPattern = '';
+  regexPattern = signal<string>('');
 
   private destroyRef = inject(DestroyRef);
 
@@ -37,14 +37,14 @@ export class RegexComponent {
             try {
               const regex = new RegExp(pattern, 'g');
               const matches = this.testStringValue.match(regex);
-              this.regexPattern = matches ? matches.join('') : 'No matches found';
+              this.regexPattern.set(matches ? matches.join('\n') : 'No matches found');
               console.log('Matches found:', this.regexPattern);
             } catch (error) {
               console.error('Invalid regex pattern:', error);
-              this.regexPattern = 'Invalid regex pattern';
+              this.regexPattern.set('Invalid regex pattern');
             }
           } else {
-            this.regexPattern = '';
+            this.regexPattern.set('');
           }
         })
       ).subscribe({
