@@ -1,0 +1,7 @@
+<ul>
+        @for (flag of flags; track flag.name) {
+            <label>
+                <input type="checkbox" (change)="onFlagChange(flag)"> {{flag.name}} - {{flag.description}}
+            </label>
+        }
+    </ul>

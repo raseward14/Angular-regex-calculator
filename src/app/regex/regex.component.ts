@@ -2,18 +2,19 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs/operators';
 
+import { FlagsComponent } from '../flags/flags.component';
+
 @Component({
   selector: 'app-regex',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, FlagsComponent],
   templateUrl: './regex.component.html',
   styleUrl: './regex.component.css',
 })
 export class RegexComponent {
   regexForm = new FormGroup({
     regexControl: new FormControl(''),
-    testStringControl: new FormControl('this is a hard coded test string.')
-  }
-  )
+    testStringControl: new FormControl('this is a hard coded test string.'),
+  });
   regexPattern = signal<string>('');
 
   private destroyRef = inject(DestroyRef);
