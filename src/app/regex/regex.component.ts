@@ -4,6 +4,8 @@ import { debounceTime, tap } from 'rxjs/operators';
 
 import { FlagsComponent } from '../flags/flags.component';
 
+import type { Flag } from '../types';
+
 @Component({
   selector: 'app-regex',
   imports: [ReactiveFormsModule, FormsModule, FlagsComponent],
@@ -16,6 +18,7 @@ export class RegexComponent {
     testStringControl: new FormControl('this is a hard coded test string.'),
   });
   regexPattern = signal<string>('');
+  chosenFlags = signal<Flag[]>([]);
 
   private destroyRef = inject(DestroyRef);
 
@@ -31,7 +34,7 @@ export class RegexComponent {
     const subscription = this.regexForm.valueChanges
       .pipe(
         debounceTime(500), // Wait for 500ms of inactivity
-        tap(value => {
+        tap((value) => {
           console.log('regex changed:', value);
           const pattern = this.regexControlValue;
           if (pattern) {
@@ -47,16 +50,22 @@ export class RegexComponent {
           } else {
             this.regexPattern.set('');
           }
-        })
-      ).subscribe({
+        }),
+      )
+      .subscribe({
         next: (value) => {
           console.log('value changed: ', value);
-        }
+        },
       });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
-    })
+    });
   }
 
+  onChosenFlags(chosenFlags: any) {
+    console.log('Chosen flags changed:', chosenFlags);
+    // Handle the chosen flags as needed
+    this.chosenFlags.set(chosenFlags.map((flag: Flag) => flag.name).join(''));
+  }
 }

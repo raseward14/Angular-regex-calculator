@@ -1,26 +1,23 @@
 <form [formGroup]="regexForm">
-    <section>
-        <h4>Expression</h4>
-        <span class="form-control">
-            /<input 
-                type="text" 
-                formControlName="regexControl" 
-                [attr.size]="regexControlValue.length || 0" 
-                placeholder="Enter regex here" />/g
-        </span>
-        <app-flags />
-        
-    </section>
-    <hr />
-    <section>
-        <h4>Test String</h4>
-        <textarea 
-            class="regex-section" 
-            formControlName="testStringControl"></textarea>
-    </section>
-    <section>
-        <h4>Matches</h4>
-        <textarea
-            class="regex-section">{{regexPattern()}}</textarea>
-    </section>
+  <section>
+    <h4>Expression</h4>
+    <span class="form-control">
+      /<input
+        type="text"
+        formControlName="regexControl"
+        [attr.size]="regexControlValue.length || 0"
+        placeholder="Enter regex here"
+      />/{{ chosenFlags() }}
+    </span>
+    <app-flags (chosenFlags)="onChosenFlags($event)" />
+  </section>
+  <hr />
+  <section>
+    <h4>Test String</h4>
+    <textarea class="regex-section" formControlName="testStringControl"></textarea>
+  </section>
+  <section>
+    <h4>Matches</h4>
+    <textarea class="regex-section">{{ regexPattern() }}</textarea>
+  </section>
 </form>

@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
-type Flag = {
-  name: string;
-  description: string;
-}
+import type { Flag } from '../types';
 
 @Component({
   selector: 'app-flags',
@@ -18,14 +15,16 @@ export class FlagsComponent {
     { name: 'm', description: 'Multi-line search' },
     { name: 's', description: 'Dot matches newline' },
     { name: 'u', description: 'Unicode search' },
-    { name: 'y', description: 'Sticky search' }
+    { name: 'y', description: 'Sticky search' },
   ];
 
+  @Output() chosenFlags = new EventEmitter<Flag[]>();
   selectedFlags: Flag[] = [];
 
   onFlagChange(flag: Flag) {
-    this.selectedFlags = this.selectedFlags.includes(flag) ? this.selectedFlags.filter(f => f !== flag)
+    this.selectedFlags = this.selectedFlags.includes(flag)
+      ? this.selectedFlags.filter((f) => f !== flag)
       : [...this.selectedFlags, flag];
-    console.log('Selected flags:', this.selectedFlags.map(flag => flag.name).join(', '));
+    this.chosenFlags.emit(this.selectedFlags);
   }
 }
