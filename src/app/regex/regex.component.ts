@@ -18,7 +18,7 @@ export class RegexComponent {
     testStringControl: new FormControl('this is a hard coded test string.'),
   });
   regexPattern = signal<string>('');
-  chosenFlags = signal<Flag[]>([]);
+  chosenFlags = signal<string>('');
 
   private destroyRef = inject(DestroyRef);
 
@@ -39,8 +39,11 @@ export class RegexComponent {
           const pattern = this.regexControlValue;
           if (pattern) {
             try {
-              const regex = new RegExp(pattern, 'g');
+              const currentFlags = this.chosenFlags();
+
+              const regex = new RegExp(pattern, currentFlags);
               const matches = this.testStringValue.match(regex);
+
               this.regexPattern.set(matches ? matches.join('\n') : 'No matches found');
               console.log('Matches found:', this.regexPattern);
             } catch (error) {
@@ -67,5 +70,9 @@ export class RegexComponent {
     console.log('Chosen flags changed:', chosenFlags);
     // Handle the chosen flags as needed
     this.chosenFlags.set(chosenFlags.map((flag: Flag) => flag.name).join(''));
+    console.log(this.chosenFlags());
+
+    // manually trigger ta form value evaluation so the regex recalculates immediately when a user checks or unchecks a box
+    this.regexForm.updateValueAndValidity();
   }
 }
