@@ -2,12 +2,13 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs/operators';
 
-import { FlagsComponent } from '../flags/flags.component';
+import { FlagsComponent } from './flags/flags.component';
 
 import type { Flag } from '../types';
 
 @Component({
   selector: 'app-regex',
+  standalone: true,
   imports: [ReactiveFormsModule, FormsModule, FlagsComponent],
   templateUrl: './regex.component.html',
   styleUrl: './regex.component.css',

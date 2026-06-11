@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import type { Flag } from '../types';
+import type { Flag } from '../../types';
 
 @Component({
   selector: 'app-flags',
