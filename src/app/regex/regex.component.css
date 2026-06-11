@@ -1,32 +1,32 @@
 .form-control {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    width: auto;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  width: auto;
 }
 
 hr {
-    margin: 1rem 0 1rem 0;
-    background: yellow;
+  margin: 1rem 0 1rem 0;
+  background: yellow;
 }
 
 .regex-section {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    color: #333;
-    height: 10rem;
-    width: 45rem;
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 4px;
-    overflow: auto;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+  height: 10rem;
+  width: 45rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow: auto;
 }
 
 input {
-    border: none;
-    padding: 5px;
-    margin: 5px;
-    font-size: 1.2rem;
-    width: fit-content;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  font-size: 1.2rem;
+  width: fit-content;
 }

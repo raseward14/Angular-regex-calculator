@@ -17,7 +17,8 @@ export class RegexComponent {
     regexControl: new FormControl(''),
     testStringControl: new FormControl('this is a hard coded test string.'),
   });
-  regexPattern = signal<string>('');
+
+  matchingPatterns = signal<string>('');
   chosenFlags = signal<string>('');
 
   private destroyRef = inject(DestroyRef);
@@ -26,32 +27,25 @@ export class RegexComponent {
     return this.regexForm.get('regexControl')?.value ?? '';
   }
 
-  get testStringValue() {
-    return this.regexForm.get('testStringControl')?.value ?? '';
-  }
-
   constructor() {
     const subscription = this.regexForm.valueChanges
       .pipe(
         debounceTime(500), // Wait for 500ms of inactivity
         tap((value) => {
-          console.log('regex changed:', value);
           const pattern = this.regexControlValue;
           if (pattern) {
             try {
               const currentFlags = this.chosenFlags();
-
               const regex = new RegExp(pattern, currentFlags);
-              const matches = this.testStringValue.match(regex);
+              const matches = this.regexForm.controls.testStringControl.value?.match(regex);
 
-              this.regexPattern.set(matches ? matches.join('\n') : 'No matches found');
-              console.log('Matches found:', this.regexPattern);
+              this.matchingPatterns.set(matches ? matches.join('\n') : 'No matches found');
+              // console.log('Matches found:', this.matchingPatterns);
             } catch (error) {
-              console.error('Invalid regex pattern:', error);
-              this.regexPattern.set('Invalid regex pattern');
+              this.matchingPatterns.set('Invalid regex pattern');
             }
           } else {
-            this.regexPattern.set('');
+            this.matchingPatterns.set('');
           }
         }),
       )
@@ -67,10 +61,8 @@ export class RegexComponent {
   }
 
   onChosenFlags(chosenFlags: any) {
-    console.log('Chosen flags changed:', chosenFlags);
     // Handle the chosen flags as needed
     this.chosenFlags.set(chosenFlags.map((flag: Flag) => flag.name).join(''));
-    console.log(this.chosenFlags());
 
     // manually trigger ta form value evaluation so the regex recalculates immediately when a user checks or unchecks a box
     this.regexForm.updateValueAndValidity();
