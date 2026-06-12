@@ -9,7 +9,3 @@
   border: 1px solid #ccc;
   border-radius: 2px;
 }
-
-.grid-item:hover {
-  background-color: grey;
-}

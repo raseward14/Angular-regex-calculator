@@ -1,6 +1,6 @@
 <div class="two-column-grid">
   @for (flag of flags; track flag.name) {
-    <label>
+    <label class="grid-item">
       <input type="checkbox" (change)="onFlagChange(flag)" class="grid-item" /> {{ flag.name }} -
       {{ flag.description }}
     </label>

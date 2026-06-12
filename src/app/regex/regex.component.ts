@@ -3,13 +3,14 @@ import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from '@angul
 import { debounceTime, tap } from 'rxjs/operators';
 
 import { FlagsComponent } from './flags/flags.component';
+import { CharactersComponent } from './characters/characters.component';
 
 import type { Flag } from '../types';
 
 @Component({
   selector: 'app-regex',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, FlagsComponent],
+  imports: [ReactiveFormsModule, FormsModule, FlagsComponent, CharactersComponent],
   templateUrl: './regex.component.html',
   styleUrl: './regex.component.css',
 })
