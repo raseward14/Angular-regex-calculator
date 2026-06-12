@@ -1,0 +1,10 @@
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* creates two equal columns */
+  gap: 2px;
+}
+
+.grid-item {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
