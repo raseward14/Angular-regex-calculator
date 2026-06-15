@@ -1,16 +1,20 @@
 <form [formGroup]="regexForm">
   <section>
     <h4>Expression</h4>
-    <span class="form-control">
-      /<input
-        type="text"
-        formControlName="regexControl"
-        [attr.size]="regexControlValue.length || -1"
-        placeholder="Enter regex here"
-      />/{{ chosenFlags() }}
-    </span>
-    <app-flags (chosenFlags)="onChosenFlags($event)" />
-    <app-characters></app-characters>
+    <div class="two-column-grid">
+      <div class="grid-item">
+        <span class="form-control">
+          /<input
+            type="text"
+            formControlName="regexControl"
+            [attr.size]="regexControlValue.length || -1"
+            placeholder="Enter regex here"
+          />/{{ chosenFlags() }}
+        </span>
+        <app-flags (chosenFlags)="onChosenFlags($event)" />
+      </div>
+      <app-characters class="grid-item" />
+    </div>
   </section>
   <hr />
   <section>
