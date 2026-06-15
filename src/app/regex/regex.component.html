@@ -1,6 +1,5 @@
 <form [formGroup]="regexForm">
   <section>
-    <h4>Expression</h4>
     <div class="two-column-grid">
       <div class="grid-item">
         <span class="form-control">
@@ -11,18 +10,21 @@
             placeholder="Enter regex here"
           />/{{ chosenFlags() }}
         </span>
-        <app-flags (chosenFlags)="onChosenFlags($event)" />
+        <hr />
+        <section>
+          <h4>Test String</h4>
+          <textarea class="regex-section" formControlName="testStringControl"></textarea>
+        </section>
+        <section>
+          <h4>Matches</h4>
+          <textarea class="regex-section">{{ matchingPatterns() }}</textarea>
+        </section>
       </div>
-      <app-characters class="grid-item" />
+      <div class="grid-item">
+        <app-flags (chosenFlags)="onChosenFlags($event)" />
+        <br />
+        <app-characters />
+      </div>
     </div>
-  </section>
-  <hr />
-  <section>
-    <h4>Test String</h4>
-    <textarea class="regex-section" formControlName="testStringControl"></textarea>
-  </section>
-  <section>
-    <h4>Matches</h4>
-    <textarea class="regex-section">{{ matchingPatterns() }}</textarea>
   </section>
 </form>
