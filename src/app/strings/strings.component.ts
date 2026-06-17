@@ -25,10 +25,20 @@ export class StringsComponent {
       description:
         'method returns the character at a specific index (position) in a string. Does not allow negative indexes.',
     },
-    { method: 'charCodeAt()', description: '' },
-    { method: 'codePointAt()', description: '' },
-    { method: 'concat()', description: '' },
-    { method: '[]', description: '' },
+    {
+      method: 'charCodeAt()',
+      description: 'returns the code of the character at a specific index in a string.',
+    },
+    {
+      method: 'codePointAt()',
+      description: 'get code point value at the first position in a string.',
+    },
+    { method: 'concat()', description: 'use instead of the plus operator.' },
+    {
+      method: '[]',
+      description:
+        'property access. makes strings look like arrays. no char found returns undefined while charAt() returns an empty string. Read only.',
+    },
     { method: 'slice()', description: '' },
     { method: 'substring()', description: '' },
     { method: 'substr()', description: '' },
