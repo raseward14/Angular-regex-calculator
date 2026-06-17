@@ -21,10 +21,30 @@ export class StringsComponent {
         'method returns the character at a specific index (position) in a string. Allows negative indexes.',
     },
     {
-      method: 'chatAt(position)',
+      method: 'charAt(position)',
       description:
         'method returns the character at a specific index (position) in a string. Does not allow negative indexes.',
     },
+    { method: 'charCodeAt()', description: '' },
+    { method: 'codePointAt()', description: '' },
+    { method: 'concat()', description: '' },
+    { method: '[]', description: '' },
+    { method: 'slice()', description: '' },
+    { method: 'substring()', description: '' },
+    { method: 'substr()', description: '' },
+    { method: 'toUpperCase()', description: '' },
+    { method: 'toLowerCase()', description: '' },
+    { method: 'isWellFormatted()', description: '' },
+    { method: 'toWellFormatted()', description: '' },
+    { method: 'trim()', description: '' },
+    { method: 'trimStart()', description: '' },
+    { method: 'trimEnd()', description: '' },
+    { method: 'padStart()', description: '' },
+    { method: 'padEnd()', description: '' },
+    { method: 'repeat()', description: '' },
+    { method: 'replace()', description: '' },
+    { method: 'replaceAll()', description: '' },
+    { method: 'split()', description: '' },
   ];
 
   calculatedResult = computed(() => {
