@@ -13,6 +13,19 @@ import type { StringMethod } from '../types';
 export class StringsComponent {
   userInput = signal('');
   calculatedOperation = signal('');
+  position = signal(0);
+  resolvedOperation = signal('');
+
+  hasParameters = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('position')) {
+      return false;
+    }
+
+    return true;
+  });
+
   stringMethods = [
     { method: 'length', description: 'property returns the length of a string' },
     {
@@ -58,16 +71,21 @@ export class StringsComponent {
   ];
 
   calculatedResult = computed(() => {
-    return this.userInput().length;
+    switch (this.calculatedOperation()) {
+      case 'length':
+        return this.userInput().length;
+      default:
+        return '0';
+    }
   });
 
   onMethodChange(method: StringMethod) {
-    console.log(method.method);
     if (method.method !== this.calculatedOperation()) {
       this.calculatedOperation.set(method.method);
     } else {
       this.calculatedOperation.set('');
     }
     console.log(this.calculatedOperation());
+    console.log(this.hasParameters());
   }
 }

@@ -10,6 +10,9 @@
     />
     ";
     <p><span style="color: blue">let</span> code = text.{{ calculatedOperation() }}</p>
+    @if (hasParameters()) {
+      Position: <input type="number" [ngModel]="position()" />
+    }
     <p>Result: {{ calculatedResult() }}</p>
   </div>
   <div class="child-item">
