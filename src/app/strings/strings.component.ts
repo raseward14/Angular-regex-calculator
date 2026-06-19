@@ -15,15 +15,6 @@ export class StringsComponent {
   calculatedOperation = signal('');
   position = signal(0);
 
-  hasParameters = computed(() => {
-    if (!this.calculatedOperation()) {
-      return false;
-    } else if (!this.calculatedOperation().includes('position')) {
-      return false;
-    }
-    return true;
-  });
-
   stringMethods = [
     { method: 'length', description: 'property returns the length of a string' },
     {
@@ -68,6 +59,22 @@ export class StringsComponent {
     { method: 'split()', description: '' },
   ];
 
+  hasParameters = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('position')) {
+      return false;
+    }
+    return true;
+  });
+
+  resolvedOperation = computed(() => {
+    let method = this.calculatedOperation();
+    return method.includes('position')
+      ? method.replace('position', this.position().toString())
+      : method;
+  });
+
   calculatedResult = computed(() => {
     switch (this.calculatedOperation()) {
       case 'length':
@@ -77,13 +84,6 @@ export class StringsComponent {
       default:
         return '0';
     }
-  });
-
-  resolvedOperation = computed(() => {
-    let method = this.calculatedOperation();
-    return method.includes('position')
-      ? method.replace('position', this.position().toString())
-      : method;
   });
 
   onMethodChange(method: StringMethod) {
