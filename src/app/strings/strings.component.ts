@@ -14,7 +14,6 @@ export class StringsComponent {
   userInput = signal('');
   calculatedOperation = signal('');
   position = signal(0);
-  resolvedOperation = signal('');
 
   hasParameters = computed(() => {
     if (!this.calculatedOperation()) {
@@ -73,9 +72,18 @@ export class StringsComponent {
     switch (this.calculatedOperation()) {
       case 'length':
         return this.userInput().length;
+      case 'at(position)':
+        return this.userInput().at(this.position());
       default:
         return '0';
     }
+  });
+
+  resolvedOperation = computed(() => {
+    let method = this.calculatedOperation();
+    return method.includes('position')
+      ? method.replace('position', this.position().toString())
+      : method;
   });
 
   onMethodChange(method: StringMethod) {

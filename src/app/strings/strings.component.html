@@ -9,12 +9,14 @@
       placeholder="..."
     />
     ";
-    <p><span style="color: blue">let</span> code = text.{{ calculatedOperation() }}</p>
+
+    <p><span style="color: blue">let</span> code = text.{{ resolvedOperation() }}</p>
     @if (hasParameters()) {
-      Position: <input type="number" [ngModel]="position()" />
+      Position: <input type="number" [(ngModel)]="position" />
     }
     <p>Result: {{ calculatedResult() }}</p>
   </div>
+
   <div class="child-item">
     <div class="two-column-grid">
       @for (method of stringMethods; track $index) {
