@@ -22,7 +22,6 @@ export class StringsComponent {
     } else if (!this.calculatedOperation().includes('position')) {
       return false;
     }
-
     return true;
   });
 
