@@ -14,13 +14,16 @@ export class StringsComponent {
   userInput = signal('');
   calculatedOperation = signal('');
   position = signal(0);
+  string = signal('');
+  startPosition = signal(0);
+  endPosition = signal(0);
 
   stringMethods = [
     { method: 'length', description: 'property returns the length of a string' },
     {
       method: 'at(position)',
       description:
-        'method returns the character at a specific index (position) in a string. Allows negative indexes.',
+        'method returns the character at a specific index (position) in a string. Allows negative indexes. Introduced in ES2022.',
     },
     {
       method: 'charAt(position)',
@@ -28,20 +31,28 @@ export class StringsComponent {
         'method returns the character at a specific index (position) in a string. Does not allow negative indexes.',
     },
     {
-      method: 'charCodeAt()',
-      description: 'returns the code of the character at a specific index in a string.',
+      method: 'charCodeAt(position)',
+      description:
+        'returns a UTF-16 code (integer between 0 and 65535) of the character at a specific index in a string.',
     },
     {
-      method: 'codePointAt()',
+      method: 'codePointAt(position)',
       description: 'get code point value at the first position in a string.',
     },
-    { method: 'concat()', description: 'use instead of the plus operator.' },
     {
-      method: '[]',
-      description:
-        'property access. makes strings look like arrays. no char found returns undefined while charAt() returns an empty string. Read only.',
+      method: 'concat(string)',
+      description: 'joins two or more strings. use instead of the plus operator.',
     },
-    { method: 'slice()', description: '' },
+    {
+      method: '[position]',
+      description:
+        'property access. makes strings look like arrays. no char found returns undefined while charAt() returns an empty string. Read only. str[0] = "A" gives no error (but does not work!)',
+    },
+    {
+      method: 'slice(start, end)',
+      description:
+        'extracts part of a string. returns the extracted part in a new string. (end not included)',
+    },
     { method: 'substring()', description: '' },
     { method: 'substr()', description: '' },
     { method: 'toUpperCase()', description: '' },
@@ -59,10 +70,28 @@ export class StringsComponent {
     { method: 'split()', description: '' },
   ];
 
-  hasParameters = computed(() => {
+  hasStartAndEndPositions = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('start, end')) {
+      return false;
+    }
+    return true;
+  });
+
+  hasPositionParameter = computed(() => {
     if (!this.calculatedOperation()) {
       return false;
     } else if (!this.calculatedOperation().includes('position')) {
+      return false;
+    }
+    return true;
+  });
+
+  hasStringParameter = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('string')) {
       return false;
     }
     return true;
@@ -72,17 +101,37 @@ export class StringsComponent {
     let method = this.calculatedOperation();
     return method.includes('position')
       ? method.replace('position', this.position().toString())
-      : method;
+      : method.includes('string')
+        ? method.replace('string', `"${this.string().toString()}"`)
+        : method.includes('start, end')
+          ? method.replace('start, end', `${this.startPosition()}, ${this.endPosition()}`)
+          : method;
   });
 
   calculatedResult = computed(() => {
+    const posNum = Number(this.position());
+    const stringValue = String(this.string());
+    const startNum = Number(this.startPosition());
+    const endNum = Number(this.endPosition());
     switch (this.calculatedOperation()) {
       case 'length':
         return this.userInput().length;
       case 'at(position)':
-        return this.userInput().at(this.position());
+        return this.userInput().at(posNum);
+      case 'charAt(postition)':
+        return this.userInput().charAt(posNum);
+      case 'charCodeAt(position)':
+        return this.userInput().charCodeAt(posNum);
+      case 'codePointAt(position)':
+        return this.userInput().codePointAt(posNum);
+      case '[position]':
+        return this.userInput()[posNum];
+      case 'concat(string)':
+        return this.userInput().concat(stringValue);
+      case 'slice(start, end)':
+        return this.userInput().slice(startNum, endNum);
       default:
-        return '0';
+        return '';
     }
   });
 
@@ -93,6 +142,7 @@ export class StringsComponent {
       this.calculatedOperation.set('');
     }
     console.log(this.calculatedOperation());
-    console.log(this.hasParameters());
+    console.log('position parameter: ', this.hasPositionParameter());
+    console.log('string parameter: ', this.hasStringParameter());
   }
 }

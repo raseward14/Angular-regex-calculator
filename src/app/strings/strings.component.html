@@ -11,8 +11,15 @@
     ";
 
     <p><span style="color: blue">let</span> code = text.{{ resolvedOperation() }}</p>
-    @if (hasParameters()) {
+    @if (hasPositionParameter()) {
       Position: <input type="number" [(ngModel)]="position" />
+    }
+    @if (hasStringParameter()) {
+      String: <input type="text" [(ngModel)]="string" />
+    }
+    @if (hasStartAndEndPositions()) {
+      Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
+      End: <input type="number" [(ngModel)]="endPosition" />
     }
     <p>Result: {{ calculatedResult() }}</p>
   </div>
