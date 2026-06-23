@@ -30,7 +30,7 @@
   margin-bottom: -12px;
   color: white;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.3fr 0.3fr 1fr 1fr 1fr;
   gap: 10px;
 }
 
@@ -64,4 +64,16 @@
   height: 50%;
   width: 1fr;
   padding: 20px;
+  display: grid;
+  grid-template-rows: 0.05fr 0.1fr;
+}
+
+.console-output {
+  border-top: 1px solid grey;
+  width: 100%;
+  padding-top: 10px;
+}
+
+input {
+  padding: 5px;
 }

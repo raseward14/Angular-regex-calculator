@@ -21,13 +21,19 @@
       Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
       End: <input type="number" [(ngModel)]="endPosition" />
     }
-    console.log(code)
     <p class="console-header">
+      <i class="fa-solid fa-border-none"></i>
+      <i class="fa-solid fa-computer"></i>
       <span>Elements</span>
       <span class="console-console">Console</span>
       <i class="fa-solid fa-angles-right"></i>
     </p>
-    <p class="console">{{ calculatedResult() }}</p>
+    <p class="console">
+      <span>console.log(code)</span>
+      <span class="console-output">
+        {{ calculatedResult() }}
+      </span>
+    </p>
   </div>
 
   <div class="child-item">
