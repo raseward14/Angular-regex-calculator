@@ -51,7 +51,7 @@ export class StringsComponent {
     {
       method: 'slice(start, end)',
       description:
-        'extracts part of a string. returns the extracted part in a new string. (end not included)',
+        'extracts part of a string. returns the extracted part in a new string. zero indexed. (end not included)',
     },
     { method: 'substring()', description: '' },
     { method: 'substr()', description: '' },
