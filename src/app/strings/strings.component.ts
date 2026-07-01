@@ -53,7 +53,10 @@ export class StringsComponent {
       description:
         'extracts part of a string. returns the extracted part in a new string. zero indexed. (end not included)',
     },
-    { method: 'substring()', description: '' },
+    {
+      method: 'substring(start, end)',
+      description: 'similar to slice(), but treats start and end values less than 0 as 0.',
+    },
     { method: 'substr()', description: '' },
     { method: 'toUpperCase()', description: '' },
     { method: 'toLowerCase()', description: '' },
@@ -91,7 +94,7 @@ export class StringsComponent {
   hasStringParameter = computed(() => {
     if (!this.calculatedOperation()) {
       return false;
-    } else if (!this.calculatedOperation().includes('string')) {
+    } else if (!this.calculatedOperation().includes('(string)')) {
       return false;
     }
     return true;
@@ -130,6 +133,8 @@ export class StringsComponent {
         return this.userInput().concat(stringValue);
       case 'slice(start, end)':
         return this.userInput().slice(startNum, endNum);
+      case 'substring(start, end)':
+        return this.userInput().substring(startNum, endNum);
       default:
         return '';
     }
