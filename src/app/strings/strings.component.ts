@@ -121,7 +121,7 @@ export class StringsComponent {
         return this.userInput().length;
       case 'at(position)':
         return this.userInput().at(posNum);
-      case 'charAt(postition)':
+      case 'charAt(position)':
         return this.userInput().charAt(posNum);
       case 'charCodeAt(position)':
         return this.userInput().charCodeAt(posNum);
