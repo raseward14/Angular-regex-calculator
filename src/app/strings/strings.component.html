@@ -10,7 +10,7 @@
     />
     ";
 
-    <p><span style="color: blue">let</span> code = text.{{ resolvedOperation() }}</p>
+    <p><span style="color: blue">let</span> code = {{ resolvedOperation() }}</p>
     @if (hasPositionParameter()) {
       Position: <input type="number" [(ngModel)]="position" />
     }

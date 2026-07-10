@@ -102,13 +102,30 @@ export class StringsComponent {
 
   resolvedOperation = computed(() => {
     let method = this.calculatedOperation();
-    return method.includes('position')
-      ? method.replace('position', this.position().toString())
-      : method.includes('(string)')
-        ? method.replace('string', `"${this.string().toString()}"`)
-        : method.includes('start, end')
-          ? method.replace('start, end', `${this.startPosition()}, ${this.endPosition()}`)
-          : method;
+
+    if (method.includes('length')) {
+      return 'text.length';
+    }
+
+    if (method.includes('(position)')) {
+      return 'text.' + method.replace('position', this.position().toString());
+    }
+
+    if (method.includes('(string)')) {
+      return 'text.' + method.replace('string', `"${this.string().toString()}"`);
+    }
+
+    if (method.includes('(start, end)')) {
+      return (
+        'text.' + method.replace('start, end', `${this.startPosition()}, ${this.endPosition()}`)
+      );
+    }
+
+    if (method.includes('[position]')) {
+      return 'text' + method.replace('position', this.position().toString());
+    }
+
+    return method;
   });
 
   calculatedResult = computed(() => {
