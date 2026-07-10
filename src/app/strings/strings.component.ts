@@ -105,7 +105,7 @@ export class StringsComponent {
     return method.includes('position')
       ? method.replace('position', this.position().toString())
       : method.includes('(string)')
-        ? method.replace('(string)', `"${this.string().toString()}"`)
+        ? method.replace('string', `"${this.string().toString()}"`)
         : method.includes('start, end')
           ? method.replace('start, end', `${this.startPosition()}, ${this.endPosition()}`)
           : method;
