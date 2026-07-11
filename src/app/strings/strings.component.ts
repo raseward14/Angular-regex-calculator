@@ -57,7 +57,11 @@ export class StringsComponent {
       method: 'substring(start, end)',
       description: 'similar to slice(), but treats start and end values less than 0 as 0.',
     },
-    { method: 'substr()', description: '' },
+    {
+      method: 'substr(start, length)',
+      description:
+        'similar to slice(). Second parameter specifies the length of the extracted part. Deprecated in the latest JavaScript standard. Still officially defined for backward compatibility. Use substring() or slice() instead. If you omit the second paramteter, will slice out the rest of the string. If the first parameter is negative, the position counts from the end of the string.',
+    },
     { method: 'toUpperCase()', description: '' },
     { method: 'toLowerCase()', description: '' },
     { method: 'isWellFormatted()', description: '' },
@@ -73,7 +77,18 @@ export class StringsComponent {
     { method: 'split()', description: '' },
   ];
 
+  hasStartAndLengthPositions = computed(() => {
+    console.log('calculated operation: ', this.calculatedOperation());
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('start, length')) {
+      return false;
+    }
+    return true;
+  });
+
   hasStartAndEndPositions = computed(() => {
+    console.log('calculated operation: ', this.calculatedOperation());
     if (!this.calculatedOperation()) {
       return false;
     } else if (!this.calculatedOperation().includes('start, end')) {
@@ -103,7 +118,8 @@ export class StringsComponent {
   resolvedOperation = computed(() => {
     let method = this.calculatedOperation();
 
-    if (method.includes('length')) {
+    if (method === 'length') {
+      console.log(method);
       return 'text.length';
     }
 
@@ -118,6 +134,12 @@ export class StringsComponent {
     if (method.includes('(start, end)')) {
       return (
         'text.' + method.replace('start, end', `${this.startPosition()}, ${this.endPosition()}`)
+      );
+    }
+
+    if (method.includes('(start, length)')) {
+      return (
+        'text.' + method.replace('start, length', `${this.startPosition()}, ${this.endPosition()}`)
       );
     }
 
@@ -152,6 +174,9 @@ export class StringsComponent {
         return this.userInput().slice(startNum, endNum);
       case 'substring(start, end)':
         return this.userInput().substring(startNum, endNum);
+      case 'substr(start, length)':
+        console.log(this.userInput().substr(startNum, endNum));
+        return this.userInput().substr(startNum, endNum);
       default:
         return '';
     }
@@ -164,6 +189,7 @@ export class StringsComponent {
       this.calculatedOperation.set('');
     }
     console.log(this.calculatedOperation());
+    console.log('start and end or length parameters: ', this.hasStartAndEndPositions());
     console.log('position parameter: ', this.hasPositionParameter());
     console.log('string parameter: ', this.hasStringParameter());
   }

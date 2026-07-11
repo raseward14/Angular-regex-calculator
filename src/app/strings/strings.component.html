@@ -21,6 +21,10 @@
       Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
       End: <input type="number" [(ngModel)]="endPosition" />
     }
+    @if (hasStartAndLengthPositions()) {
+      Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
+      Length: <input type="number" [(ngModel)]="endPosition" />
+    }
     <p class="console-header">
       <i class="fa-solid fa-border-none"></i>
       <i class="fa-solid fa-computer"></i>
