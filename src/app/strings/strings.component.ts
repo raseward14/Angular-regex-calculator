@@ -64,17 +64,27 @@ export class StringsComponent {
     },
     { method: 'toUpperCase()', description: 'A string is converted to upper case.' },
     { method: 'toLowerCase()', description: 'A string is converted to lower case.' },
-    { method: 'isWellFormatted()', description: '' },
-    { method: 'toWellFormatted()', description: '' },
-    { method: 'trim()', description: '' },
-    { method: 'trimStart()', description: '' },
-    { method: 'trimEnd()', description: '' },
-    { method: 'padStart()', description: '' },
-    { method: 'padEnd()', description: '' },
-    { method: 'repeat()', description: '' },
-    { method: 'replace()', description: '' },
-    { method: 'replaceAll()', description: '' },
-    { method: 'split()', description: '' },
+    {
+      method: 'isWellFormed()',
+      description:
+        'returns true if a string is well formed. Otherwise it returns false. A string is not well formed if it contains lone surrogates. In UTF-16 encoding, characters are represented using 16-bit code units. Some characters are represented using two code units, called a surrogate pair. A lone surrogate is a code unit that is not part of a valid surrogate pair. Valid Pair: \uD83D\uDE00 correctly combines a high and a low surrogate to render the Grinning Face emoji (😀). Lone Surrogate: \uD83D or \uDE00 printed completely on its own, or two high surrogates next to each other like \uD83D\uD83D',
+    },
+    { method: 'toWellFormed()', description: 'converts a string to well formed.' },
+    { method: 'trim()', description: 'removes whitespace from both ends of a string.' },
+    { method: 'trimStart()', description: 'removes whitespace from the beginning of a string.' },
+    { method: 'trimEnd()', description: 'removes whitespace from the end of a string.' },
+    { method: 'padStart()', description: 'pads a string with another string at the beginning.' },
+    { method: 'padEnd()', description: 'pads a string with another string at the end.' },
+    { method: 'repeat()', description: 'repeats the string a specified number of times.' },
+    {
+      method: 'replace()',
+      description: 'replaces a specified value with another value in a string.',
+    },
+    {
+      method: 'replaceAll()',
+      description: 'replaces all occurrences of a specified value with another value in a string.',
+    },
+    { method: 'split()', description: 'splits a string into an array of substrings.' },
   ];
 
   hasStartAndLengthPositions = computed(() => {
@@ -122,14 +132,6 @@ export class StringsComponent {
       return 'text.length';
     }
 
-    if (method === 'toUpperCase()') {
-      return 'text.toUpperCase()';
-    }
-
-    if (method === 'toLowerCase()') {
-      return 'text.toLowerCase()';
-    }
-
     if (method.includes('(position)')) {
       return 'text.' + method.replace('position', this.position().toString());
     }
@@ -154,7 +156,8 @@ export class StringsComponent {
       return 'text' + method.replace('position', this.position().toString());
     }
 
-    return method;
+    // fallback for methods that don't require parameters
+    return 'text.' + method;
   });
 
   calculatedResult = computed(() => {
@@ -187,6 +190,10 @@ export class StringsComponent {
         return this.userInput().toUpperCase();
       case 'toLowerCase()':
         return this.userInput().toLowerCase();
+      case 'isWellFormed()':
+        return this.userInput().isWellFormed();
+      case 'toWellFormed()':
+        return this.userInput().toWellFormed();
       default:
         return '';
     }
