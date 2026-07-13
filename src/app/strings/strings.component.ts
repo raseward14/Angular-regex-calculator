@@ -62,8 +62,8 @@ export class StringsComponent {
       description:
         'similar to slice(). Second parameter specifies the length of the extracted part. Deprecated in the latest JavaScript standard. Still officially defined for backward compatibility. Use substring() or slice() instead. If you omit the second paramteter, will slice out the rest of the string. If the first parameter is negative, the position counts from the end of the string.',
     },
-    { method: 'toUpperCase()', description: '' },
-    { method: 'toLowerCase()', description: '' },
+    { method: 'toUpperCase()', description: 'A string is converted to upper case.' },
+    { method: 'toLowerCase()', description: 'A string is converted to lower case.' },
     { method: 'isWellFormatted()', description: '' },
     { method: 'toWellFormatted()', description: '' },
     { method: 'trim()', description: '' },
@@ -119,8 +119,15 @@ export class StringsComponent {
     let method = this.calculatedOperation();
 
     if (method === 'length') {
-      console.log(method);
       return 'text.length';
+    }
+
+    if (method === 'toUpperCase()') {
+      return 'text.toUpperCase()';
+    }
+
+    if (method === 'toLowerCase()') {
+      return 'text.toLowerCase()';
     }
 
     if (method.includes('(position)')) {
@@ -175,8 +182,11 @@ export class StringsComponent {
       case 'substring(start, end)':
         return this.userInput().substring(startNum, endNum);
       case 'substr(start, length)':
-        console.log(this.userInput().substr(startNum, endNum));
         return this.userInput().substr(startNum, endNum);
+      case 'toUpperCase()':
+        return this.userInput().toUpperCase();
+      case 'toLowerCase()':
+        return this.userInput().toLowerCase();
       default:
         return '';
     }
