@@ -195,10 +195,16 @@ export class StringsComponent {
       case 'toWellFormed()':
         return this.userInput().toWellFormed();
       case 'trim()':
+        console.log('user input untrimmed: ', this.userInput());
+        console.log('user input: ', this.userInput().trim());
         return this.userInput().trim();
       case 'trimStart()':
+        console.log('user input untrimmed: ', this.userInput());
+        console.log('user input: ', this.userInput().trim());
         return this.userInput().trimStart();
       case 'trimEnd()':
+        console.log('user input untrimmed: ', this.userInput());
+        console.log('user input: ', this.userInput().trim());
         return this.userInput().trimEnd();
       case 'padStart()':
         return this.userInput().padStart(posNum, stringValue);
