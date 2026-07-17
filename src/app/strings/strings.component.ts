@@ -194,6 +194,24 @@ export class StringsComponent {
         return this.userInput().isWellFormed();
       case 'toWellFormed()':
         return this.userInput().toWellFormed();
+      case 'trim()':
+        return this.userInput().trim();
+      case 'trimStart()':
+        return this.userInput().trimStart();
+      case 'trimEnd()':
+        return this.userInput().trimEnd();
+      case 'padStart()':
+        return this.userInput().padStart(posNum, stringValue);
+      case 'padEnd()':
+        return this.userInput().padEnd(posNum, stringValue);
+      case 'repeat()':
+        return this.userInput().repeat(posNum);
+      case 'replace()':
+        return this.userInput().replace(stringValue, stringValue);
+      case 'replaceAll()':
+        return this.userInput().replaceAll(stringValue, stringValue);
+      case 'split()':
+        return this.userInput().split(stringValue);
       default:
         return '';
     }
