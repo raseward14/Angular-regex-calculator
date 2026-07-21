@@ -22,6 +22,12 @@
   border-radius: 2px;
 }
 
+.sticky {
+  position: sticky;
+  top: 8px;
+  z-index: 1;
+}
+
 .string {
   min-width: 4ch;
   font-family: monospace;

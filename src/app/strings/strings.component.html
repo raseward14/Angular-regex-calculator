@@ -1,45 +1,47 @@
 <div class="parent-grid">
   <div class="child-item">
-    <span style="color: blue">let</span> text = "
-    <input
-      name="userString"
-      [style.width.ch]="userInput().length > 0 ? userInput().length : 2"
-      class="string"
-      [(ngModel)]="userInput"
-      placeholder="..."
-    />
-    ";
+    <div class="sticky">
+      <span style="color: blue">let</span> text = "
+      <input
+        name="userString"
+        [style.width.ch]="userInput().length > 0 ? userInput().length : 2"
+        class="string"
+        [(ngModel)]="userInput"
+        placeholder="..."
+      />
+      ";
 
-    <p><span style="color: blue">let</span> code = {{ resolvedOperation() }}</p>
-    @if (hasPositionParameter()) {
-      Position: <input type="number" [(ngModel)]="position" />
-    }
-    @if (hasStringParameter()) {
-      String: <input type="text" [(ngModel)]="string" />
-    }
-    @if (hasStartAndEndPositions()) {
-      Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
-      End: <input type="number" [(ngModel)]="endPosition" />
-    }
-    @if (hasStartAndLengthPositions()) {
-      Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
-      Length: <input type="number" [(ngModel)]="endPosition" />
-    }
-    <p class="console-header">
-      <i class="fa-solid fa-border-none"></i>
-      <i class="fa-solid fa-computer"></i>
-      <span>Elements</span>
-      <span class="console-console">Console</span>
-      <i class="fa-solid fa-angles-right"></i>
-    </p>
-    <p class="console">
-      <span>console.log(code)</span>
-      <span class="console-output">
-        <span>"</span>
-        <span>{{ calculatedResult() }}</span>
-        <span>"</span>
-      </span>
-    </p>
+      <p><span style="color: blue">let</span> code = {{ resolvedOperation() }}</p>
+      @if (hasPositionParameter()) {
+        Position: <input type="number" [(ngModel)]="position" />
+      }
+      @if (hasStringParameter()) {
+        String: <input type="text" [(ngModel)]="string" />
+      }
+      @if (hasStartAndEndPositions()) {
+        Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
+        End: <input type="number" [(ngModel)]="endPosition" />
+      }
+      @if (hasStartAndLengthPositions()) {
+        Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
+        Length: <input type="number" [(ngModel)]="endPosition" />
+      }
+      <p class="console-header">
+        <i class="fa-solid fa-border-none"></i>
+        <i class="fa-solid fa-computer"></i>
+        <span>Elements</span>
+        <span class="console-console">Console</span>
+        <i class="fa-solid fa-angles-right"></i>
+      </p>
+      <p class="console">
+        <span>console.log(code)</span>
+        <span class="console-output">
+          <span>"</span>
+          <span>{{ calculatedResult() }}</span>
+          <span>"</span>
+        </span>
+      </p>
+    </div>
   </div>
 
   <div class="child-item">
