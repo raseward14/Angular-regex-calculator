@@ -73,8 +73,14 @@ export class StringsComponent {
     { method: 'trim()', description: 'removes whitespace from both ends of a string.' },
     { method: 'trimStart()', description: 'removes whitespace from the beginning of a string.' },
     { method: 'trimEnd()', description: 'removes whitespace from the end of a string.' },
-    { method: 'padStart()', description: 'pads a string with another string at the beginning.' },
-    { method: 'padEnd()', description: 'pads a string with another string at the end.' },
+    {
+      method: 'padStart(length, "string")',
+      description: 'pads a string with another string at the beginning.',
+    },
+    {
+      method: 'padEnd(length, "string")',
+      description: 'pads a string with another string at the end.',
+    },
     { method: 'repeat()', description: 'repeats the string a specified number of times.' },
     {
       method: 'replace()',
@@ -125,6 +131,15 @@ export class StringsComponent {
     return true;
   });
 
+  hasLengthAndStringParameter = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('(length, "string")')) {
+      return false;
+    }
+    return true;
+  });
+
   resolvedOperation = computed(() => {
     let method = this.calculatedOperation();
 
@@ -154,6 +169,12 @@ export class StringsComponent {
 
     if (method.includes('[position]')) {
       return 'text' + method.replace('position', this.position().toString());
+    }
+
+    if (method.includes('(length, "string")')) {
+      return (
+        'text' + method.replace('length, "string"', `${this.endPosition()}, "${this.string()}"`)
+      );
     }
 
     // fallback for methods that don't require parameters
@@ -195,21 +216,19 @@ export class StringsComponent {
       case 'toWellFormed()':
         return this.userInput().toWellFormed();
       case 'trim()':
-        console.log('user input untrimmed: ', this.userInput());
-        console.log('user input: ', this.userInput().trim());
         return this.userInput().trim();
       case 'trimStart()':
-        console.log('user input untrimmed: ', this.userInput());
-        console.log('user input: ', this.userInput().trim());
         return this.userInput().trimStart();
       case 'trimEnd()':
-        console.log('user input untrimmed: ', this.userInput());
-        console.log('user input: ', this.userInput().trim());
         return this.userInput().trimEnd();
-      case 'padStart()':
-        return this.userInput().padStart(posNum, stringValue);
-      case 'padEnd()':
-        return this.userInput().padEnd(posNum, stringValue);
+      case 'padStart(length, "string")':
+        console.log('user input unpadded: ', this.userInput());
+        console.log('user input padded: ', this.userInput().padStart(endNum, stringValue));
+        return this.userInput().padStart(endNum, stringValue);
+      case 'padEnd(length, "string")':
+        console.log('user input unpadded: ', this.userInput());
+        console.log('user input padded: ', this.userInput().padEnd(endNum, stringValue));
+        return this.userInput().padEnd(endNum, stringValue);
       case 'repeat()':
         return this.userInput().repeat(posNum);
       case 'replace()':

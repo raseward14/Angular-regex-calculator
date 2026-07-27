@@ -26,6 +26,10 @@
         Start: <input type="number" [(ngModel)]="startPosition" /><br /><br />
         Length: <input type="number" [(ngModel)]="endPosition" />
       }
+      @if (hasLengthAndStringParameter()) {
+        Length: <input type="number" [(ngModel)]="endPosition" /><br /><br />
+        String: <input type="text" [(ngModel)]="string" />
+      }
       <p class="console-header">
         <i class="fa-solid fa-border-none"></i>
         <i class="fa-solid fa-computer"></i>
