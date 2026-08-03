@@ -17,6 +17,7 @@ export class StringsComponent {
   string = signal('');
   startPosition = signal(0);
   endPosition = signal(0);
+  count = signal(0);
 
   stringMethods = [
     { method: 'length', description: 'property returns the length of a string' },
@@ -81,7 +82,11 @@ export class StringsComponent {
       method: 'padEnd(length, "string")',
       description: 'pads a string with another string at the end.',
     },
-    { method: 'repeat()', description: 'repeats the string a specified number of times.' },
+    {
+      method: 'repeat(count)',
+      description:
+        'repeats the string a specified number of times. Does not change the original string, instead creates a new string.',
+    },
     {
       method: 'replace()',
       description: 'replaces a specified value with another value in a string.',
@@ -140,6 +145,15 @@ export class StringsComponent {
     return true;
   });
 
+  hasCountParameter = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('count')) {
+      return false;
+    }
+    return true;
+  });
+
   resolvedOperation = computed(() => {
     let method = this.calculatedOperation();
 
@@ -177,6 +191,10 @@ export class StringsComponent {
       );
     }
 
+    if (method.includes('(count)')) {
+      return 'text.' + method.replace('count', this.count().toString());
+    }
+
     // fallback for methods that don't require parameters
     return 'text.' + method;
   });
@@ -186,6 +204,7 @@ export class StringsComponent {
     const stringValue = String(this.string());
     const startNum = Number(this.startPosition());
     const endNum = Number(this.endPosition());
+    const countNum = Number(this.count());
     switch (this.calculatedOperation()) {
       case 'length':
         return this.userInput().length;
@@ -229,8 +248,8 @@ export class StringsComponent {
         console.log('user input unpadded: ', this.userInput());
         console.log('user input padded: ', this.userInput().padEnd(endNum, stringValue));
         return this.userInput().padEnd(endNum, stringValue);
-      case 'repeat()':
-        return this.userInput().repeat(posNum);
+      case 'repeat(count)':
+        return this.userInput().repeat(countNum);
       case 'replace()':
         return this.userInput().replace(stringValue, stringValue);
       case 'replaceAll()':

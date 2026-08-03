@@ -30,6 +30,9 @@
         Length: <input type="number" [(ngModel)]="endPosition" /><br /><br />
         String: <input type="text" [(ngModel)]="string" />
       }
+      @if (hasCountParameter()) {
+        Count: <input type="number" [(ngModel)]="count" />
+      }
       <p class="console-header">
         <i class="fa-solid fa-border-none"></i>
         <i class="fa-solid fa-computer"></i>
