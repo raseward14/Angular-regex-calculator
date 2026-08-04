@@ -33,6 +33,10 @@
       @if (hasCountParameter()) {
         Count: <input type="number" [(ngModel)]="count" />
       }
+      @if (hasMultipleStringParameters()) {
+        Old String: <input type="text" [(ngModel)]="string" /><br /><br />
+        New String: <input type="text" [(ngModel)]="newString" />
+      }
       <p class="console-header">
         <i class="fa-solid fa-border-none"></i>
         <i class="fa-solid fa-computer"></i>

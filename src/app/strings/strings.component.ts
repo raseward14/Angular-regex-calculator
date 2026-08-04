@@ -18,6 +18,7 @@ export class StringsComponent {
   startPosition = signal(0);
   endPosition = signal(0);
   count = signal(0);
+  newString = signal('');
 
   stringMethods = [
     { method: 'length', description: 'property returns the length of a string' },
@@ -88,8 +89,9 @@ export class StringsComponent {
         'repeats the string a specified number of times. Does not change the original string, instead creates a new string.',
     },
     {
-      method: 'replace()',
-      description: 'replaces a specified value with another value in a string.',
+      method: 'replace("old string", "newstring")',
+      description:
+        'replaces a specified value with another value in a string. Only replace the first occurrence of the specified value. Returns a new string, does not change the original string.',
     },
     {
       method: 'replaceAll()',
@@ -154,6 +156,15 @@ export class StringsComponent {
     return true;
   });
 
+  hasMultipleStringParameters = computed(() => {
+    if (!this.calculatedOperation()) {
+      return false;
+    } else if (!this.calculatedOperation().includes('("old string", "new string")')) {
+      return false;
+    }
+    return true;
+  });
+
   resolvedOperation = computed(() => {
     let method = this.calculatedOperation();
 
@@ -195,6 +206,16 @@ export class StringsComponent {
       return 'text.' + method.replace('count', this.count().toString());
     }
 
+    if (method.includes('("old string", "new string")')) {
+      return (
+        'text.' +
+        method.replace(
+          '("old string", "new string")',
+          `("${this.string()}", "${this.newString()}")`,
+        )
+      );
+    }
+
     // fallback for methods that don't require parameters
     return 'text.' + method;
   });
@@ -205,6 +226,7 @@ export class StringsComponent {
     const startNum = Number(this.startPosition());
     const endNum = Number(this.endPosition());
     const countNum = Number(this.count());
+    const newStringValue = String(this.newString());
     switch (this.calculatedOperation()) {
       case 'length':
         return this.userInput().length;
@@ -250,10 +272,10 @@ export class StringsComponent {
         return this.userInput().padEnd(endNum, stringValue);
       case 'repeat(count)':
         return this.userInput().repeat(countNum);
-      case 'replace()':
-        return this.userInput().replace(stringValue, stringValue);
-      case 'replaceAll()':
-        return this.userInput().replaceAll(stringValue, stringValue);
+      case 'replace("old string", "new string")':
+        return this.userInput().replace(stringValue, newStringValue);
+      case 'replaceAll("old string", "new string")':
+        return this.userInput().replaceAll(stringValue, newStringValue);
       case 'split()':
         return this.userInput().split(stringValue);
       default:
