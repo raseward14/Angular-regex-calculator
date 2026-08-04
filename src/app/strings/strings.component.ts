@@ -89,7 +89,7 @@ export class StringsComponent {
         'repeats the string a specified number of times. Does not change the original string, instead creates a new string.',
     },
     {
-      method: 'replace("old string", "newstring")',
+      method: 'replace("old string", "new string")',
       description:
         'replaces a specified value with another value in a string. Only replace the first occurrence of the specified value. Returns a new string, does not change the original string.',
     },
