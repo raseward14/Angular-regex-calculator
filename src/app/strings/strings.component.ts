@@ -94,7 +94,7 @@ export class StringsComponent {
         'replaces a specified value with another value in a string. Only replace the first occurrence of the specified value. Returns a new string, does not change the original string.',
     },
     {
-      method: 'replaceAll()',
+      method: 'replaceAll("old string", "new string")',
       description: 'replaces all occurrences of a specified value with another value in a string.',
     },
     { method: 'split()', description: 'splits a string into an array of substrings.' },
