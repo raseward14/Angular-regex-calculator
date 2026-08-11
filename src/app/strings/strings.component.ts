@@ -97,7 +97,7 @@ export class StringsComponent {
       method: 'replaceAll("old string", "new string")',
       description: 'replaces all occurrences of a specified value with another value in a string.',
     },
-    { method: 'split()', description: 'splits a string into an array of substrings.' },
+    { method: 'split(string)', description: 'splits a string into an array of substrings.' },
   ];
 
   hasStartAndLengthPositions = computed(() => {
@@ -276,7 +276,7 @@ export class StringsComponent {
         return this.userInput().replace(stringValue, newStringValue);
       case 'replaceAll("old string", "new string")':
         return this.userInput().replaceAll(stringValue, newStringValue);
-      case 'split()':
+      case 'split(string)':
         return this.userInput().split(stringValue);
       default:
         return '';
