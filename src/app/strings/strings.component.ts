@@ -277,7 +277,11 @@ export class StringsComponent {
       case 'replaceAll("old string", "new string")':
         return this.userInput().replaceAll(stringValue, newStringValue);
       case 'split(string)':
-        return this.userInput().split(stringValue);
+        console.log(stringValue);
+        console.log(this.userInput().split(stringValue));
+        let splitResult = JSON.stringify(this.userInput().split(stringValue));
+        console.log('split result: ', splitResult);
+        return splitResult;
       default:
         return '';
     }

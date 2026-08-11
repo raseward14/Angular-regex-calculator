@@ -46,11 +46,18 @@
       </p>
       <p class="console">
         <span>console.log(code)</span>
-        <span class="console-output">
-          <span>"</span>
-          <span>{{ calculatedResult() }}</span>
-          <span>"</span>
-        </span>
+
+        @if (calculatedOperation() === 'split(string)') {
+          <span class="console-output">
+            <span>{{ calculatedResult() }}</span>
+          </span>
+        } @else {
+          <span class="console-output">
+            <span>"</span>
+            <span>{{ calculatedResult() }}</span>
+            <span>"</span>
+          </span>
+        }
       </p>
     </div>
   </div>
