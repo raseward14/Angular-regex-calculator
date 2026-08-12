@@ -1,6 +1,10 @@
-# AngularRegexCalculator
+# JavaScript Classroom
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.13.
+
+This is a learning tool for JavaScript RegEx and String methods.
+
+Visit it live here: [JavaScript-Classroom](https://raseward14.github.io/Angular-regex-calculator/)
 
 ## Development server
 
