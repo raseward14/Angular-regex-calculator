@@ -1,0 +1,18 @@
+<div class="chat-container">
+  <h3>Chat with Document</h3>
+
+  <div class="messages">
+    @for (msg of messages(); track $index) {
+      <p>
+        <strong>{{ msg.role }}:</strong> {{ msg.text }}
+      </p>
+    }
+  </div>
+
+  <input
+    [(ngModel)]="userInput"
+    placeholder="Ask something about the document..."
+    (keyup.enter)="sendMessage()"
+  />
+  <button (click)="sendMessage()">Send</button>
+</div>
