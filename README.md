@@ -4,7 +4,12 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 This is a learning tool for JavaScript RegEx and String methods.
 
+Use the Chat with Gemini feature for help with which JS methods and regex to use.
+
 Visit it live here: [JavaScript-Classroom](https://raseward14.github.io/Angular-regex-calculator/)
+
+<img width="2598" height="1602" alt="image" src="https://github.com/user-attachments/assets/d83e27dd-5711-49d9-842e-a217d9c5cc69" />
+
 
 ## Development server
 
@@ -39,24 +44,6 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
 
