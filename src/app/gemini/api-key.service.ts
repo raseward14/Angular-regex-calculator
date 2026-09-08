@@ -3,7 +3,7 @@ import { Injectable, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ApiKeyService {
-  private readonly STORAGE_KEY = 'gemini_api_key';
+  private readonly STORAGE_KEY = 'GEMINI_API_KEY';
 
   apiKey = signal<string>(localStorage.getItem(this.STORAGE_KEY) ?? '');
 

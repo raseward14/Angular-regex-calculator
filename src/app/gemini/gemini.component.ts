@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { GoogleGenAI } from '@google/genai';
 import { ApiKeyService } from './api-key.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -21,7 +22,7 @@ export class Gemini {
 
   private getClient(): GoogleGenAI {
     if (!this.ai) {
-      const key = this.apiKeyService.apiKey();
+      const key = this.apiKeyService.apiKey() || environment.geminiApiKey;
       if (!key) throw new Error('No API key set');
       this.ai = new GoogleGenAI({ apiKey: key });
     }
@@ -45,7 +46,7 @@ export class Gemini {
 
     try {
       const response = await this.getClient().models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: query,
         config: {
           systemInstruction: `You are a helpful assistant answering questions about this document:\n\n${this.documentContent}`,
