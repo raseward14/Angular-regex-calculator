@@ -29,17 +29,34 @@ export class RegexComponent {
     return this.regexForm.get('regexControl')?.value ?? '';
   }
 
+  get testStringControlValue() {
+    return this.regexForm.get('testStringControl')?.value ?? '';
+  }
+
   constructor() {
     const subscription = this.regexForm.valueChanges
       .pipe(
         debounceTime(500), // Wait for 500ms of inactivity
         tap((value) => {
           const pattern = this.regexControlValue;
+          const testString = this.testStringControlValue;
+          console.log('regexControlValue: ', pattern);
+          console.log('testStringControlValue: ', testString.split('\n'));
           if (pattern) {
             try {
               const currentFlags = this.chosenFlags();
+              const isMultiline = currentFlags.includes('m');
+
               const regex = new RegExp(pattern, currentFlags);
-              const matches = this.regexForm.controls.testStringControl.value?.match(regex);
+              let matches;
+
+              isMultiline
+                ? (matches = this.regexForm.controls.testStringControl.value?.match(regex))
+                : (matches = this.regexForm.controls.testStringControl.value
+                    ?.split('\n')[0]
+                    ?.match(regex));
+
+              console.log(isMultiline, currentFlags, 'matches: ', matches);
 
               this.matchingPatterns.set(matches ? matches.join('\n') : 'No matches found');
               // console.log('Matches found:', this.matchingPatterns);
