@@ -3,6 +3,25 @@
     <td>Need help? Ask Gemini about string methods, or regular expressions.</td>
   </tr>
   <tr>
-    <td><app-chat /></td>
+    @if (storedKey()) {
+      <td><app-chat [apiKey]="storedKey()" /></td>
+      <button (click)="clearKey()">Clear API key</button>
+    } @else {
+      <td>
+        <label for="apiKey">Enter your Gemini API key</label>
+        <input
+          id="apiKey"
+          type="password"
+          [(ngModel)]="keyInput"
+          (keyup.enter)="submitKey()"
+          placeholder="AIza..."
+        />
+        <button (click)="submitKey()">Save & start chatting</button>
+        <p class="key-note">
+          Your key is stored only in your browser's localStorage and is sent directly to Google's
+          API — never to any server of mine.
+        </p>
+      </td>
+    }
   </tr>
 </table>

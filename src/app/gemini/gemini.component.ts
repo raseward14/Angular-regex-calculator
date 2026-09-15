@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { GoogleGenAI } from '@google/genai';
@@ -11,26 +11,19 @@ import { environment } from '../../environments/environment';
   templateUrl: './gemini.component.html',
   styleUrl: './gemini.component.css',
 })
-export class Gemini {
+export class Gemini implements OnInit {
   private http = inject(HttpClient);
-  private apiKeyService = inject(ApiKeyService);
-  private ai: GoogleGenAI | null = null;
+
+  apiKey = input.required<string>();
+  private ai!: GoogleGenAI;
 
   userInput = '';
   messages = signal<{ role: string; text: string }[]>([]);
   private documentContent = '';
 
-  private getClient(): GoogleGenAI {
-    if (!this.ai) {
-      const key = this.apiKeyService.apiKey() || environment.geminiApiKey;
-      if (!key) throw new Error('No API key set');
-      this.ai = new GoogleGenAI({ apiKey: key });
-    }
-    return this.ai;
-  }
-
   ngOnInit() {
-    console.log('Gemini component initialized', this.ai);
+    this.ai = new GoogleGenAI({ apiKey: this.apiKey() });
+
     // 1. Fetch your local static resource (e.g., public/assets/doc.txt or doc.json)
     this.http
       .get('assets/static-data.json', { responseType: 'json' })
@@ -45,7 +38,7 @@ export class Gemini {
     this.userInput = '';
 
     try {
-      const response = await this.getClient().models.generateContent({
+      const response = await this.ai.models.generateContent({
         model: 'gemini-3.6-flash',
         contents: query,
         config: {
