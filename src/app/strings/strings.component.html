@@ -63,16 +63,18 @@
   </div>
 
   <div class="child-item">
-    <div class="two-column-grid">
-      @for (method of stringMethods; track $index) {
-        <label class="grid-item">
-          <input name="stringMethods" type="radio" (change)="onMethodChange(method)" />
-          <span style="font-weight: bold"> {{ method.method }}</span>
-        </label>
-        <div class="grid-item">
-          {{ method.description }}
-        </div>
-      }
-    </div>
+    <app-open-close>
+      <div class="two-column-grid">
+        @for (method of stringMethods; track $index) {
+          <label class="grid-item">
+            <input name="stringMethods" type="radio" (change)="onMethodChange(method)" />
+            <span style="font-weight: bold"> {{ method.method }}</span>
+          </label>
+          <div class="grid-item">
+            {{ method.description }}
+          </div>
+        }
+      </div>
+    </app-open-close>
   </div>
 </div>

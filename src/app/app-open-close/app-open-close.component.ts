@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 
 @Component({
-  selector: 'app-app-open-close.component',
+  selector: 'app-open-close',
   imports: [],
   templateUrl: './app-open-close.component.html',
   styleUrl: './app-open-close.component.css',

@@ -2,10 +2,11 @@ import { Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import type { StringMethod } from '../types';
+import { AppOpenCloseComponent } from '../app-open-close/app-open-close.component';
 
 @Component({
   selector: 'app-strings',
-  imports: [FormsModule],
+  imports: [FormsModule, AppOpenCloseComponent],
   standalone: true,
   templateUrl: './strings.component.html',
   styleUrl: './strings.component.css',
