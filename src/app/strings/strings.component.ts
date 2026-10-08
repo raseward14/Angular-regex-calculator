@@ -21,6 +21,8 @@ export class StringsComponent {
   count = signal(0);
   newString = signal('');
 
+  itemsList: string[] = ['JS String Methods', 'JS String Search'];
+
   stringMethods = [
     { method: 'length', description: 'property returns the length of a string' },
     {

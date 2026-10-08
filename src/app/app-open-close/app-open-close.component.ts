@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-open-close',
@@ -8,6 +8,8 @@ import { Component, signal } from '@angular/core';
 })
 export class AppOpenCloseComponent {
   isOpen = signal(true);
+  @Input() section: string = '';
+
   toggle() {
     this.isOpen.update((isOpen) => !isOpen);
   }
