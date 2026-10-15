@@ -9,6 +9,7 @@
   padding: 20px 20px 0px 20px;
   height: 100px;
   opacity: 0;
+  display: none;
 }
 
 .toggle-btn {
@@ -24,4 +25,5 @@
   transition-duration: 1s;
   height: fit-content;
   opacity: 1;
+  display: block;
 }
