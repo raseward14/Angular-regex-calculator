@@ -67,16 +67,10 @@
       <app-open-close [section]="item">
         <div class="two-column-grid">
           @if (item === 'JS String Methods') {
-            @for (method of stringMethods; track $index) {
-              <label class="grid-item">
-                <input name="stringMethods" type="radio" (change)="onMethodChange(method)" />
-                <span style="font-weight: bold"> {{ method.method }}</span>
-              </label>
-
-              <div class="grid-item">
-                {{ method.description }}
-              </div>
-            }
+            <app-string-methods (setOperation)="messageReceived($event)" />
+          }
+          @if (item === 'JS String Search') {
+            <app-string-search (setOperation)="messageReceived($event)" />
           }
         </div>
       </app-open-close>

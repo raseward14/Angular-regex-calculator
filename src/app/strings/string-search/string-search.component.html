@@ -1,0 +1,10 @@
+@for (search of stringSearches; track $index) {
+  <label class="grid-item">
+    <input name="stringSearches" type="radio" (change)="onMethodChange(search)" />
+    <span style="font-weight: bold"> {{ search.search }}</span>
+  </label>
+
+  <div class="grid-item">
+    {{ search.description }}
+  </div>
+}
