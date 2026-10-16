@@ -4,12 +4,6 @@
   gap: 2px;
 }
 
-.grid-item {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-}
-
 .parent-grid {
   display: grid;
   grid-template-columns: 1fr 4fr;
