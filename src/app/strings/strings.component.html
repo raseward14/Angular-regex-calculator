@@ -65,12 +65,12 @@
   <div class="child-item">
     @for (item of itemsList; track $index) {
       <app-open-close [section]="item">
-        <div class="two-column-grid">
+        <div>
           @if (item === 'JS String Methods') {
-            <app-string-methods (setOperation)="messageReceived($event)" />
+            <app-string-methods class="two-column-grid" (setOperation)="messageReceived($event)" />
           }
           @if (item === 'JS String Search') {
-            <app-string-search (setOperation)="messageReceived($event)" />
+            <app-string-search class="two-column-grid" (setOperation)="messageReceived($event)" />
           }
         </div>
       </app-open-close>
