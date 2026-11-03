@@ -95,7 +95,7 @@ export class StringsComponent {
 
   resolvedOperation = computed(() => {
     let method = this.calculatedOperation();
-
+    console.log('resolved operation method: ', method);
     if (method === 'length') {
       return 'text.length';
     }
@@ -210,6 +210,8 @@ export class StringsComponent {
         let splitResult = JSON.stringify(this.userInput().split(stringValue));
         console.log('split result: ', splitResult);
         return splitResult;
+      case 'indexOf(string)':
+        return this.userInput().indexOf(stringValue);
       default:
         return '';
     }
