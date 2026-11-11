@@ -212,6 +212,8 @@ export class StringsComponent {
         return splitResult;
       case 'indexOf(string)':
         return this.userInput().indexOf(stringValue);
+      case 'lastIndexOf(string)':
+        return this.userInput().lastIndexOf(stringValue);
       default:
         return '';
     }

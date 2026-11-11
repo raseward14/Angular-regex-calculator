@@ -16,7 +16,12 @@ export class StringSearchComponent {
     {
       search: 'indexOf(string)',
       description:
-        'returns the index (position) of the first occurrence of a string in a string, or it returns -1 if the string is not found.',
+        'returns the index (position) of the first occurrence of the specified text in a string, or it returns -1 if the string is not found.',
+    },
+    {
+      search: 'lastIndexOf(string)',
+      description:
+        'returns the index (position) of the last occurrence of the specified text in a string, or it returns -1 if the string is not found.',
     },
   ];
 
