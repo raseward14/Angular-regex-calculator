@@ -23,6 +23,11 @@ export class StringSearchComponent {
       description:
         'returns the index (position) of the last occurrence of the specified text in a string, or it returns -1 if the string is not found.',
     },
+    {
+      search: 'search(string)',
+      description:
+        'searches a string for a string (or a regular expression) and returns the position of the match.',
+    },
   ];
 
   onMethodChange(search: StringSearch) {

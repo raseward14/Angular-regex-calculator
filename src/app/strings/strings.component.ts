@@ -214,6 +214,9 @@ export class StringsComponent {
         return this.userInput().indexOf(stringValue);
       case 'lastIndexOf(string)':
         return this.userInput().lastIndexOf(stringValue);
+      case 'search(string)':
+        console.log('searching for: ', stringValue);
+        return this.userInput().search(stringValue);
       default:
         return '';
     }
