@@ -28,6 +28,28 @@ export class StringsComponent {
     this.calculatedOperation.set(operation);
   }
 
+  parseInput(input: string): string | RegExp {
+    // Check if the string starts with '/' and ends with '/flags' (e.g., /locate/i)
+    const regexMatch = input.match(/^\/(.+)\/([gimsuy]*)$/);
+
+    if (regexMatch) {
+      const pattern = regexMatch[1];
+      const flags = regexMatch[2];
+
+      try {
+        // Attempt to construct a real RegExp object
+        return new RegExp(pattern, flags);
+      } catch (e) {
+        // If the user typed invalid regex (like /[a-z/), fall back to a plain string
+        console.warn('Invalid regex syntax, treating as literal string:', e);
+        return input;
+      }
+    }
+
+    // Not formatted like a regex literal, return as a standard string
+    return input;
+  }
+
   hasStartAndLengthPositions = computed(() => {
     console.log('calculated operation: ', this.calculatedOperation());
     if (!this.calculatedOperation()) {
@@ -215,8 +237,10 @@ export class StringsComponent {
       case 'lastIndexOf(string)':
         return this.userInput().lastIndexOf(stringValue);
       case 'search(string)':
-        console.log('searching for: ', stringValue);
-        return this.userInput().search(stringValue);
+        // call helper method to see if the string matches /pattern/flags
+        const parsedInput = this.parseInput(stringValue);
+        return this.userInput().search(parsedInput);
+
       default:
         return '';
     }
