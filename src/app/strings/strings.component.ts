@@ -240,7 +240,6 @@ export class StringsComponent {
         // call helper method to see if the string matches /pattern/flags
         const parsedInput = this.parseInput(stringValue);
         return this.userInput().search(parsedInput);
-
       default:
         return '';
     }
